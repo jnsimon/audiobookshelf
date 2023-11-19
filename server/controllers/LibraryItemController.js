@@ -50,6 +50,9 @@ class LibraryItemController {
         }
       }
 
+      const rating = await Database.userMediaRatingModel.findUserRating(req.user.id, item.id)
+      Logger.debug(`[LibraryItemController] User Rating: ${rating}`)
+
       return res.json(item)
     }
     res.json(req.libraryItem)

@@ -120,6 +120,39 @@ class MeController {
     res.sendStatus(200)
   }
 
+  // GET: api/me/rating/:id
+  async getUserMediaRating(req, res) {
+    const mediaRating = await Database.userMediaRatingModel.findUserRating(req.user.id, req.params.id)
+    if (!mediaRating) {
+      return res.sendStatus(404)
+    }
+    res.json(mediaRating)
+  }
+
+  // PATCH: api/me/rating/:id
+  async createUpdateUserMediaRating(req, res) {
+    const libraryItem = await Database.libraryItemModel.getOldById(req.params.id)
+    if (!libraryItem) {
+      return res.status(404).send('Item not found')
+    }
+
+    await Database.userMediaRatingModel.createUpdateUserMediaRating(req.user.id, libraryItem.id, req.body)
+
+    res.sendStatus(200)
+  }
+
+  // DELETE: api/me/rating/:id
+  async removeUserMediaRating(req, res) {
+    const mediaRating = await Database.userMediaRatingModel.findUserRating(req.user.id, req.params.id)
+    if (!mediaRating) {
+      return res.status(404).send('Rating not found')
+    }
+
+    await mediaRating.destroy();
+
+    res.sendStatus(200)
+  }
+
   // POST: api/me/item/:id/bookmark
   async createBookmark(req, res) {
     if (!await Database.libraryItemModel.checkExistsById(req.params.id)) return res.sendStatus(404)

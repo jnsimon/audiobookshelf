@@ -177,6 +177,9 @@ class ApiRouter {
     this.router.get('/me/items-in-progress', MeController.getAllLibraryItemsInProgress.bind(this))
     this.router.get('/me/series/:id/remove-from-continue-listening', MeController.removeSeriesFromContinueListening.bind(this))
     this.router.get('/me/series/:id/readd-to-continue-listening', MeController.readdSeriesFromContinueListening.bind(this))
+    this.router.get('/me/rating/:id', MeController.getUserMediaRating.bind(this))
+    this.router.patch('/me/rating/:id', MeController.createUpdateUserMediaRating.bind(this))
+    this.router.delete('/me/rating/:id', MeController.removeUserMediaRating.bind(this))
 
     //
     // Backup Routes

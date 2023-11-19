@@ -97,6 +97,11 @@ class Database {
     return this.models.mediaProgress
   }
 
+  /** @type {typeof import('./models/UserMediaRating')} */
+  get userMediaRatingModel() {
+    return this.models.userMediaRating
+  }
+
   /** @type {typeof import('./models/Collection')} */
   get collectionModel() {
     return this.models.collection
@@ -227,6 +232,7 @@ class Database {
     require('./models/PodcastEpisode').init(this.sequelize)
     require('./models/LibraryItem').init(this.sequelize)
     require('./models/MediaProgress').init(this.sequelize)
+    require('./models/UserMediaRating').init(this.sequelize)
     require('./models/Series').init(this.sequelize)
     require('./models/BookSeries').init(this.sequelize)
     require('./models/Author').init(this.sequelize)
